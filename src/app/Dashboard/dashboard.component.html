@@ -1,0 +1,7 @@
+<ul *ngFor="let post of posts | async">
+    <li>
+      <strong>{{ post.name}}</strong>
+      <br>
+      {{post.category}}
+    </li>
+  </ul>

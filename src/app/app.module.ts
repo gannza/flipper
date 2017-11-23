@@ -4,24 +4,24 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms'; // <-- here
-import { RoundProgressModule } from 'angular-svg-round-progressbar'; // <-- here
-
-
-
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
+import { DashboardComponent } from 'app/DashBoard/dashboard.component';
+import { appRouting } from 'app/app-routing.module';
+import { firebaseFirestoreConfig } from 'app/firebaseconfig/firebase';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule, // <-- here
-    RoundProgressModule, // <-- and here
-    AngularFireModule.initializeApp(environment.firebase),
+    appRouting,
+    AngularFireModule.initializeApp(firebaseFirestoreConfig.firebase),
     AngularFirestoreModule.enablePersistence()
 
  ],
