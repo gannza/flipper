@@ -1,4 +1,25 @@
-<main class="column is-8">
-   <router-outlet></router-outlet>
+<NavTop></NavTop>
+<LeftSideBar></LeftSideBar>
+<main>
+  <div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
 
-  </main>
+      <router-outlet></router-outlet>
+
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer"> Flipper Beta Version 1.0.0 
+       <!-- <div class="pull-right">
+        <button type="button" routerLink="addItems" class="btn btn-circle btn-lg btn-success waves-effect waves-dark">+</button>
+    </div> -->
+</footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+  </div>
+</main>

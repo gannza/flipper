@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "angular-electron"
+    "name": "Flipper App"
   },
   "apps": [
     {
@@ -19,9 +19,23 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "assets/css/bootstrap.min.css",
+        "assets/css/style.css",
+        "assets/css/blue.css",
+        "assets/css/animate.css",
+        "assets/css/spinners.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/popper.js/dist/umd/popper.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/tether/dist/js/tether.min.js",
+        "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
+        "../node_modules/chart.js/dist/Chart.js",
+        "../node_modules/waves/dist/waves.min.js",
+        "../node_modules/sticky-kit/dist/sticky-kit.min.js",
+        "assets/js/custom.min.js",
+        "assets/js/sidebarmenu.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -51,7 +65,19 @@
     }
   },
   "defaults": {
-    "styleExt": "scss",
-    "component": {}
+    "styleExt": "css",
+    "prefixInterfaces": false,
+    "inline": {
+      "style": false,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": true,
+      "directive": true,
+      "module": false,
+      "pipe": true,
+      "service": true
+    }
   }
 }
