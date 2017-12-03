@@ -1,0 +1,95 @@
+<NavTop></NavTop>
+<div class="row" style="height:auto;background:#fff;">
+        
+          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" style="margin-top:-0.5%;
+          height: 100%;
+          top: 0px; bottom: 0px;  left: 0px;
+          padding-top:10px;">
+                 
+            <div class="card-block">
+                       
+                        <h4 class="card-title pull-left" style="text-align:center;margin-top:1%;margin-left:5%">Edit Item</h4> <div class="pull-right">
+                                <button type="button" (click)="onGoBack()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">  <i class="mdi mdi-close"></i></button>
+                            </div> 
+                        
+            </div>
+            <div class="card-block">
+<br /><br />
+                        <div class="form-horizontal form-material">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Enter item name" class="form-control form-control-line" value="{{item.name}}" [(ngModel)]="item.name" name="name">
+                                      
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="number" placeholder="Enter price" class="form-control form-control-line" value="{{item.price}}" [(ngModel)]="item.price" name="price">
+                                       
+                                    </div>
+                                </div>
+                                <input type="number" hidden="hidden" placeholder="Enter number of items(Quantity)" class="form-control form-control-line" value="{{item.stock_quantity}}" [(ngModel)]="item.stock_quantity" name="stock_quantity">
+                                
+                                    <!-- <div class="form-group">
+                                            <div class="input-group">
+                                              <input class="form-control form-control-line" placeholder="Expired Date" name="expiry_date" [(ngModel)]="item.expiry_date" ngbDatepicker #d="ngbDatepicker">
+                                              <button class="input-group-addon" (click)="d.toggle()" type="button">
+                                                <span class="mdi mdi-calendar"></span>
+                                              </button>
+                                            </div>
+                                       </div>   -->
+
+                                    <div class="form-group">
+                                            <div class="col-md-12">
+                                              <input class="form-control form-control-line" placeholder="Expired Date" value="{{item.expiry_date}}" name="expiry_date" [(ngModel)]="item.expiry_date">
+                                             
+                                            </div>
+                                       </div>  
+                                      
+                             
+                               
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <select class="form-control form-control-line" [(ngModel)]="item.category" value="{{item.category}}">
+                                            <option>Choose Category</option>
+                                            <option>Food</option>
+                                            <option>Tea</option>
+                                            <option>Coffe</option>
+                                        </select>
+                                      
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <span *ngIf="isNull">
+
+                                            <div class="alert alert-danger alert-dismissable">
+                                            <a class="close" (click)="onClose()">&times;</a>
+                                                            
+                                            <span *ngIf="isnameNull">* Please, fill item name!<br /></span>
+                                            <span *ngIf="ispriceNull">* Please, fill item price! <br /></span>
+                                            <span *ngIf="isstock_quantityNull">* Please, fill number of items(Quantity)!<br /></span>
+                                            <span *ngIf="iscategoryNull"> * Please, choose category!<br /></span>
+
+                                            </div> 
+                                        </span>
+                                        <button class="col-sm-12 btn btn-success btn-sm" (click)="onEditItem()" >Edit</button>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+          </div>
+        
+          <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" style="height: 100%;
+           top: 0px; bottom: 0px;  left: 0px;border-left:solid thin #ccc">
+        
+             <ListItems></ListItems>
+
+              </div>
+           
+        
+        </div>
+        
+        
+        

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
 import { AppComponent } from './app.component';
 
@@ -16,7 +17,22 @@ import { LeftSideBarComponent } from 'app/left-sidebar/left-sidebar.component';
 import { AddItemsComponent } from 'app/addItem/additem.component';
 import { ItemsService } from 'app/services/item.service';
 import { ItemsInStockService } from 'app/services/ItemsInStock.service';
-
+import { ListItemsComponent } from 'app/listItem/listitem.component';
+import { EditItemsComponent } from 'app/editItem/edititem.component';
+import { InscreaseItemsComponent } from 'app/increaseItem/increaseItem.component';
+import { ModalComponent } from 'app/model_dialog/model.component';
+import { ModalService } from 'app/services/modal.service';
+import { AddCartService } from 'app/services/addCart.service';
+import { AddCartComponent } from 'app/addCart/addcart.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { QRCode } from 'app/qrcode/qrcode.component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { CoreModule } from 'app/core/core.module';
+import { SharedModule } from 'app/shared/shared.module';
+import { UiModules } from 'app/ui/shared/ui.module';
+import { AuthGuard } from 'app/core/auth.guard';
+import { SplashComponent } from 'app/splashScreen/splashscreen.component';
+import { FooterComponent } from 'app/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,18 +40,31 @@ import { ItemsInStockService } from 'app/services/ItemsInStock.service';
     DashboardComponent,
     ItemsComponent,
     NavTopComponent,
+    FooterComponent,
     LeftSideBarComponent,
-    AddItemsComponent
+    AddItemsComponent,
+    ListItemsComponent,
+    EditItemsComponent,
+    InscreaseItemsComponent,
+    ModalComponent,
+    AddCartComponent,
+    QRCode,
+    SplashComponent
   ],
   imports: [
+    SharedModule,
+    UiModules,
+    CoreModule,
     BrowserModule,
     FormsModule, // <-- here
     appRouting,
     AngularFireModule.initializeApp(firebaseFirestoreConfig.firebase),
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    NgbModule.forRoot(),
+    NgxQRCodeModule
 
  ],
- providers: [ItemsService,ItemsInStockService],
+ providers: [ItemsService,ItemsInStockService,AddCartService,ModalService,BarcodeScanner,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

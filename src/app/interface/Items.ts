@@ -1,4 +1,5 @@
-export interface Items {   name:string;
+export interface Items {   
+    name:string;
     price:number;
     expiry_date:Date;
     category:string;
@@ -7,4 +8,4 @@ export interface Items {   name:string;
     sold_quantity:number;
     stock_quantity:number;
     baranchid?:number; }
-export interface ItemId extends Items { itemid: string; }
+export interface ItemId extends Items { itemid: string;source:string }

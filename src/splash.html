@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Splash Screen - Flipper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="../node_modules/jquery/dist/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+</head>
+<body class="fix-header fix-sidebar card-no-border" style="display:flex">
+  
+   <!-- ============================================================== -->
+      <!-- Preloader - style you can find in spinners.css -->
+      <!-- ============================================================== -->
+     
+      <!-- ============================================================== -->
+      <!-- Main wrapper - style you can find in pages.scss -->
+      <!-- ============================================================== -->
+      <div id="main-wrapper">
+  
+        <div class="preloader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+        </div>
+
+       </div>
+
+       <script>
+           window.addEventListener('load',()=>{
+            setInterval(rdrct, 1000);
+           });
+           function rdrct(){ return window.location.href ="index.html";} 
+          
+           </script>
+
+</body>
+</html>

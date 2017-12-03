@@ -1,0 +1,102 @@
+<div class="row" style="height:auto;background:#fff;">
+
+  <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" style="margin-top:-0.5%;
+          height: 100%;
+          top: 0px; bottom: 0px;  left: 0px;
+          padding-top:10px;">
+
+    <div class="card-block">
+
+      <h4 class="card-title pull-left" style="text-align:center;margin-top:1%;margin-left:5%">Increase {{item.name}} item quantity </h4>
+      <div class="pull-right">
+        <button type="button" (click)="onGoBack()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
+          <i class="mdi mdi-close"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="card-block">
+      <br />
+      <br />
+      <div class="form-horizontal form-material">
+
+
+
+        <div class="form-group">
+         <div class="col-md-12">
+            <div class="col-md-12">
+            Quantity in stock: {{item.stock_quantity}}
+            </div>
+             <div class="col-md-12" style="text-align:center">  </div>
+                <div class="col-md-12 modal-body">
+                  
+                <input type="number" placeholder="Add Quantity" class="form-control form-control-line" [(ngModel)]="number_quantity"  name="stock_quantity" required>
+               </div>
+          </div>
+          <div class="col-md-12">
+             <br />
+            <button class="col-sm-12 btn btn-info btn-sm" (click)="onaddItem()"><i class="mdi mdi-plus"></i></button>
+
+          </div>
+
+          <span *ngIf="isNull">
+                
+                <div class="alert alert-danger alert-dismissable">
+                        <a class="close" (click)="onClose()">&times;</a>
+                                    
+                        <span *ngIf="isstock_quantityNull">* Please, fill number of items(Quantity)!<br /></span>
+                    
+
+                </div>                                          
+         </span>
+        </div>
+
+        <hr /> {{item.name}} item in stock statment.
+        <hr />
+        <b style="font-size:11px">Category:{{item.category}}
+        </b>
+           , <b style="font-size:11px">Item quantity:{{item.stock_quantity}}
+            </b>, <b style="font-size:11px">Rest quantity:{{item.sold_quantity}} </b><br /> <b style="font-size:12px">Expired date:{{item.expiry_date}}</b>, 
+                        <b style="font-size:12px">Recorded date:{{item.recorded_date}}</b>
+                            
+                                <br />
+                                <span *ngIf="itemintock; then datas else noDatas"></span>
+                                <ng-template #datas>
+                                <table *ngIf="itemintock" class="table">
+                                        <thead>
+                                      <tr>
+                                        <th>Price </th>
+                                        <th>Quantity</th>
+                                        <th>Amount</th>
+                                        <th>In Date</th>
+                                      </tr>
+                                      </thead>
+                                      </table>
+                                <div class="message-box contact-box scrollbar-deep-gray bordered-deep-gray thin" style="height:18.3vh;overflow-y: auto;">
+                                <table *ngIf="itemintock" class="table">
+                                  <tbody>
+                                  <tr *ngFor="let _item of itemintock | async">
+                                    <td>{{item.price}} </td>
+                                    <td>{{_item.in_quantity}}</td>
+                                    <td>{{item.price*_item.in_quantity}} </td>
+                                    <td style="font-size:11px">{{_item.in_date}}</td>
+                                  </tr>
+                                  </tbody>
+                                
+                                </table>
+                                </div>
+                                </ng-template>
+                                <ng-template #noDatas>No in stock record could found!</ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" style="height: 100%;
+           top: 0px; bottom: 0px;  left: 0px;border-left:solid thin #ccc">
+
+    <ListItems></ListItems>
+
+  </div>
+
+
+</div>

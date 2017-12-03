@@ -1,37 +1,10 @@
-<div class="row" style="height:100%;min-height:100%;max-height:100%;background:#fff">
+<div class="row" style="background:#fff">
 
-  <div class="col-md-12 col-md-offset-12" style="flex: 1;margin-top:-0.3%;height:80vh;min-height:80vh;max-height:80vh ">
-    <div class="card-block bg-info">
-      <h4 class="text-white card-title">My Stock</h4>
-      <div class="col-md-8 col-md-offset-2">
-        <h5 class="m-t-30 text-white">
-          <span class="pull-right">50%</span>
-        </h5>
-        <div class="progress">
-          <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%; height:6px;">
-            <span class="sr-only">50% Complete</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12" style="height: 100%;
+  top: 0px; bottom: 0px;  left: 0px;border-left:solid thin #ccc">
 
-    <div class="message-box contact-box">
-      <div class="message-widget contact-widget" *ngFor="let item of items | async">
+    <ListItems></ListItems>
 
-        <a href="#">
-          <div class="user-img">
-            <span class="round">A</span>
-            <span class="profile-status away pull-right"></span>
-          </div>
-          <div class="mail-contnet">
-            <h5>{{ item.name}}</h5>
-            <span class="mail-desc"> {{item.category}}</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </div>
-
+     </div>
 
 </div>

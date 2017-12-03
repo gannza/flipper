@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -9,16 +8,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ItemsComponent implements OnInit {
 
-    
- items: Observable<any[]>;
-  itemsCol: AngularFirestoreCollection<any>;
-  constructor(public afs: AngularFirestore){
-
- }
+  
+  constructor(){ }
 
   ngOnInit() {
-    this.itemsCol = this.afs.collection('items');
-    this.items = this.itemsCol.valueChanges();
+
   }
 
 }

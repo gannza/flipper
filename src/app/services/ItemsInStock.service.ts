@@ -11,7 +11,7 @@ import { ItemsInStock } from 'app/interface/item_in_stock';
 export class ItemsInStockService {
   
   itemsCollection: AngularFirestoreCollection<ItemsInStock>;
-  itemDocument:   AngularFirestoreDocument<Node>;
+  itemDocument:   AngularFirestoreDocument<ItemsInStock>;
 
   constructor(private afs: AngularFirestore) {
     this.itemsCollection = this.afs.collection<ItemsInStock>('in_stock', (ref) => ref.orderBy('in_date', 'desc').limit(5));
@@ -33,6 +33,18 @@ export class ItemsInStockService {
   getItem(id: string) {
     return this.afs.doc<ItemsInStock>(`in_stock/${id}`);
   }
+getItemByid(id){
+
+  this.itemsCollection = this.afs.collection<ItemsInStock>('in_stock', (ref) => ref.where("item_id", "==", id).orderBy('in_date', 'desc').limit(5));
+  return this.itemsCollection.snapshotChanges().map(actions => {
+    return actions.map(a => {
+      const data = a.payload.doc.data() as ItemsInStock;
+      const itemid = a.payload.doc.id;
+      return { itemid, ...data };
+    });
+  });
+
+}
 
   create(items) {
     

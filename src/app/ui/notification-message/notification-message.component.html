@@ -1,0 +1,27 @@
+<div *ngIf="notify.msg | async as msg"
+  [ngClass]="{ 
+    'is-danger': msg.style == 'error',
+    'is-success': msg.style == 'success',
+    's-info': msg.style == 'info'
+  }">
+  <div *ngIf="msg.style=='error'" class="alert alert-danger">
+      <button type="button"  (click)="notify.clear()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
+          <i class="mdi mdi-close"></i>
+        </button>
+  {{ msg.content }}
+  </div>
+  <div *ngIf="msg.style=='success'" class="alert alert-success">
+      <button type="button"  (click)="notify.clear()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
+          <i class="mdi mdi-close"></i>
+        </button>
+      {{ msg.content }}
+      </div>
+      <div *ngIf="msg.style=='info'" class="alert alert-info">
+          <button type="button"  (click)="notify.clear()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
+              <i class="mdi mdi-close"></i>
+            </button>
+          {{ msg.content }}
+          </div>
+</div>
+
+

@@ -1,0 +1,96 @@
+<div class="row" style="height:auto;background:#fff;">
+        
+          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" style="margin-top:-0.5%;
+                  height: 100%;
+                  top: 0px; bottom: 0px;  left: 0px;
+                  padding-top:10px;">
+        
+            <div class="card-block">
+        
+              <h4 class="card-title pull-left" style="text-align:center;margin-top:1%;margin-left:5%">Cart Items </h4>
+              <div class="pull-right">
+                <button type="button" (click)="onGoBack()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
+                  <i class="mdi mdi-close"></i>
+                </button>
+              </div>
+        
+            </div>
+            <div class="card-block">
+              <div class="form-horizontal form-material">
+                  <hr />
+                  <span style="font-weight:bold;text-align:center;font-size:14px">Flipper Ltd<br />
+                    KIGALI CITY,AVENUE KIYOVU,KN 41 ST 12<br />Tel:(+250) 781945189
+                <br />eMail:respinho2014@gmail.com<br />TIN:10101010103</span>
+                  <hr />
+                                        <span *ngIf="nums > 0; then cartdata else nocartData"></span>
+                                        <ng-template #cartdata>
+                                        <table *ngIf="nums > 0" class="table" style="font-size:13px">
+                                             
+                                              <tr style="border-bottom:dotted">
+                                                <th>Name </th>
+                                                <th>Price </th>
+                                                <th>Quantity</th>
+                                                <th>Amount</th>
+                                              </tr>
+                                            
+                                              </table>
+                                        <div class="message-box contact-box scrollbar-deep-gray bordered-deep-gray thin" style="height:30vh;overflow-y: auto;">
+                                        <table *ngIf="nums > 0" class="table" style="font-size:14px">
+                                       
+                                          <tr *ngFor="let item of carts | async" style="border-bottom:dotted">
+                                            <th>{{item.item_name}}<b style="font-size:9px" *ngIf="item.category!='' || item.category!='Choose Category'">({{item.category}})</b> </th>
+                                            <th>{{item.price}} </th>
+                                            <th>{{item.out_quantity}}</th>
+                                            <th [ngClass]="getTotal(item.price,item.out_quantity)">{{item.price*item.out_quantity}} </th>
+                                          </tr>
+                                        
+                                        </table>
+                                       
+                                       
+                                        </div>
+
+                                        <table class="table" style="font-size:12px">
+                                            
+                                                   <tr>
+                                                           <th>ToTAL: </th>
+                                                           <th> </th>
+                                                           <th></th>
+                                                           <th>{{finalTotal}}</th>
+                                                   </tr>
+                                                   <tr style="border-bottom:dotted">
+                                                           <th>ToTAL TAX:</th>
+                                                           <th>{{finalTotal}}X{{vat}}%  </th>
+                                                           <th></th>
+                                                           <th>{{TotalTax}}</th>
+                                                   </tr>
+                                                   <tr>
+                                                           <th>CASH:</th>
+                                                           <th> </th>
+                                                           <th></th>
+                                                           <th>{{finalTotal}}</th>
+                                                   </tr>
+                                                   <tr  style="border-bottom:dotted">
+                                                           <th>ITEMS NUMBER:</th>
+                                                           <th> </th>
+                                                           <th></th>
+                                                           <th>{{nums}}</th>
+                                                   </tr>
+                                                   
+                                         </table>
+                                      
+                                        </ng-template>
+                                        <ng-template #nocartData>No items added could found!</ng-template>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" style="height: 100%;
+                   top: 0px; bottom: 0px;  left: 0px;border-left:solid thin #ccc">
+        
+            <ListItems></ListItems>
+        
+          </div>
+        
+        
+        </div>
+        

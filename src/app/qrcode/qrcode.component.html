@@ -1,0 +1,19 @@
+
+  <div>
+    <input type="text" placeholder="MY QR Code data" [(ngModel)]="qrData">
+  </div>
+  <button ion-button full icon-left (click)="createCode()">Create Code</button>
+  <button ion-button full icon-left (click)="scanCode()" color="secondary">Scan Code</button>
+ 
+  <div *ngIf="createdCode">
+    <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+    <span>
+      <p>Value: {{ createdCode }}</p>
+    </span>
+</div>
+ 
+  <div *ngIf="scannedCode">
+    <div>
+      Result from Scan: {{ scannedCode }}
+    </div>
+</div>
