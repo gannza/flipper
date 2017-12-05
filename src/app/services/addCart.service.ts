@@ -33,18 +33,6 @@ export class AddCartService {
   getItem(id: string) {
     return this.afs.doc<AddCart>(`carts_items/${id}`);
   }
-// getItemByid(id){
-
-//   this.itemsCollection = this.afs.collection<AddCart>('carts_items', (ref) => ref.where("item_id", "==", id));
-//   return this.itemsCollection.snapshotChanges().map(actions => {
-//     return actions.map(a => {
-//       const data = a.payload.doc.data() as AddCart;
-//       const itemid = a.payload.doc.id;
-//       return { itemid, ...data };
-//     });
-//   });
-
-// }
 
 
   create(items) {

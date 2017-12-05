@@ -1,5 +1,3 @@
-    <NavTop></NavTop>
-
     <div class="card-block bg-info">
     <h4 class="text-white card-title">My Stock</h4>
     <div class="col-md-8 col-md-offset-2">
@@ -35,11 +33,10 @@
             <div class="mail-contnet">
             <h5>{{item.name}}</h5>
             <span class="mail-desc">{{item.category}}
-                <b *ngIf="item.price!==null"> - {{item.price}} Rwf(Price)</b>
-                <b *ngIf="item.price!==null || item.stock_quantity!==null"> - {{item.price*item.stock_quantity}} Rwf(Amount)</b>
-                <b *ngIf="item.price!==null || item.stock_quantity!==null"> - {{item.price*item.stock_quantity-item.price*item.sold_quantity}} Rwf(Sold Amount)</b>
-                (
-                <b *ngIf="item.sold_quantity!==null || item.stock_quantity!==null"> Out Qty {{item.sold_quantity}} / In Qty {{item.stock_quantity}}</b>)
+                <b *ngIf="item.price!==null">, Price:{{item.price}} <b *ngIf="item.currency!==null">{{item.currency}}</b> </b>
+                <b *ngIf="item.price!==null || item.stock_quantity!==null">, Initial Amount:{{item.price*item.stock_quantity}} <b *ngIf="item.currency!==null">{{item.currency}}</b></b>
+                <b *ngIf="item.price!==null || item.stock_quantity!==null">, Sold Amount:{{item.price*item.stock_quantity-item.price*item.sold_quantity}} <b *ngIf="item.currency!==null">{{item.currency}}</b></b>
+                <b *ngIf="item.sold_quantity!==null || item.stock_quantity!==null">, Out Qty:{{item.sold_quantity}} / In Qty:{{item.stock_quantity}}</b>, <b *ngIf="item.unit!==null">Unit {{item.unit}}</b>
             </span>
             <span class="mail-desc" *ngIf="item.expiry_date">Exp date,{{item.expiry_date}}</span>
             <span class="mail-desc" *ngIf="item.sold_quantity!==null || item.stock_quantity!==null">
@@ -127,6 +124,3 @@
     <ng-template #noData> No items could found! </ng-template>
     <button style="z-index:1000" type="button" data-toggle="tooltip" title="Add new item" routerLink="addItems" class="btn btn-circle btn-sm btn-success waves-effect waves-dark pull-right">+</button>
     </div>
-
-
-    <Footer></Footer>

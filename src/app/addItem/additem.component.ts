@@ -25,33 +25,72 @@
                 import {
                 ItemsInStockService
                 } from 'app/services/ItemsInStock.service';
-import { I18n, CustomDatepickerI18n } from 'app/class/DatePicker';
-import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-                
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';    
+import {FormControl} from '@angular/forms';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+import * as _moment from 'moment';
+import * as _rollupMoment from 'moment';
+import { keyGeneratorService } from 'app/services/keyGenerater.service';
+const moment = _rollupMoment || _moment;
+
                 @Component({
                 selector: 'AddItems',
                 templateUrl: './additem.component.html',
                 styleUrls: ['./additem.component.css'],
+                providers: [
+                    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+                    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+                    // here, due to limitations of our example generation script.
+                    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+                    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+                  ],
                 })
                 export class AddItemsComponent implements OnInit {
-                isNull: boolean=false;
+                    date = new FormControl(moment([2017, 0, 1]));
+                    random1: number;
+                        isunitNull: boolean;
+                        iscurrencyNull: boolean;
+                        qrData: string;
+                        isNull: boolean=false;
              
-                iscategoryNull: boolean;
-                isstock_quantityNull: boolean;
-                ispriceNull: boolean;
-                isnameNull: boolean;
-                itemObj: newItems;
-                @Input() item: newItems;
-                constructor(private itemsService: ItemsService, private instockService: ItemsInStockService,private router: Router) {
+                        iscategoryNull: boolean;
+                        isstock_quantityNull: boolean;
+                        ispriceNull: boolean;
+                        isnameNull: boolean;
+                        itemObj: newItems;
+                        createdCode = null;
+                        scannedCode = null;
+                         @Input() item: newItems;
+                
+                constructor(private keycode:keyGeneratorService,private barcodeScanner: BarcodeScanner,private itemsService: ItemsService, private instockService: ItemsInStockService,private router: Router) {
                  
                 }
                  ngOnInit() {
+                  
                     this.item = new newItems();
+                  
                     this.isNull=false;
-                   
+                   this.createCode();
+                }
+
+            
+                createCode() {
+                    this.createdCode ='PRO-'+this.keycode.generatecode();
+                  }
+                 
+                scanCode() {
+                    this.barcodeScanner.scan().then(barcodeData => {
+                    this.scannedCode = barcodeData.text;
+                    }, (err) => {
+                        console.log('Error: ', err);
+                    });
                 }
 
                 onClose(){
@@ -79,20 +118,35 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
                     this.iscategoryNull = true;
                     this.isNull = true;
                     }
+                    if (this.item.currency == " Choose Currency" || this.item.currency == "" || this.item.currency == null) {
+                        this.iscurrencyNull = true;
+                        this.isNull = true;
+                        }
+                        if (this.item.unit == " Choose unit" || this.item.unit == "" || this.item.unit == null) {
+                            this.isunitNull = true;
+                            this.isNull = true;
+                            }
 
-                    if (this.item) {
+                       
+
+                    if (this.item && this.isNull==false) {
+
+                    if(this.createdCode){
+                       this.item.qrcode= this.createdCode;
+                    }
                     this.item.sold_quantity = this.item.stock_quantity;
                     this.item.icon = 612;
                     this.item.id = 1;
                     this.item.recorded_date = new Date();
 
                     if (this.item.expiry_date!==null && this.item.expiry_date) {
-
-                        this.item.expiry_date = new Date(this.item.expiry_date);
+                     
+                    this.item.expiry_date = new Date(this.item.expiry_date);
+                     
                     }else{
-
-                        this.item.expiry_date= new Date('00/00/000');
+                        this.item.expiry_date=null;
                     }
+
 
                     this.itemsService.create(this.item)
                         .then((docRef) => {
@@ -103,10 +157,11 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
                             in_date: new Date(),
                             available: true
                             })) {
+                           
+                            this.itemsService.updateSigleItem(docRef.id,{itemid:docRef.id});
 
-                            alert('successfully recorded!');
-                            
                              this.isNull = false;
+                             this.createCode();
                              return this.item = new newItems;
                         }
 

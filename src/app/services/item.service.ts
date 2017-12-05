@@ -58,6 +58,9 @@ export class ItemsService {
   updateItem(id: string, data: Partial<Items>) {
     return this.getItem(id).update(data);
   }
+  updateSigleItem(id:string,data:{}){
+    return this.getItem(id).update(data);
+  }
   
 
  

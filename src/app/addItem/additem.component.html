@@ -13,57 +13,65 @@
                         
             </div>
             <div class="card-block">
-<br /><br />
-                        <div class="form-horizontal form-material">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="Enter item name" class="form-control form-control-line" [(ngModel)]="item.name" name="name">
+                <br />
+                <div class="form-horizontal form-material">
+
+                                <div *ngIf="createdCode" class="row clearfix form-group">
+                                        <input type="text" hidden="hidden" placeholder="MY QR Code data" value="{{qrData}}" [(ngModel)]="qrData">
+                                        <div class="col-md-6 col-md-offset-3">
+                                        <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+                                         </div>
+                                       
+                                </div>
+                                    <div class="row clearfix form-group">
+                                         
+                                            <label class="col-md-4">Item name:</label>
+                                            <input type="text" placeholder="Enter item name" class="form-control form-control-line col-md-8" [(ngModel)]="item.name" name="name">
                                       
                                     </div>
+                               
+                                <div class="row form-group">
+                                        <label class="col-md-4">Price:</label>
+                                        <input type="number" placeholder="Enter price" class="form-control form-control-line col-md-5" [(ngModel)]="item.price" name="price">
+                                        <select class="form-control form-control-line col-md-3" placeholder="Choose Currency"  [(ngModel)]="item.currency">
+                                                   <option value="Rwf">Rwf</option>
+                                                   <option value="$">$ (USD)</option>
+                                                   <option value="€">€ (EURO)</option>
+                                                   <option value="£">£ (POUND)</option>
+                                               </select>
+                                 </div>
+                    
+                                <div class="row form-group">
+                                        <label class="col-md-4">Quantity:</label>
+                                        <input type="number" placeholder="Enter number of items(Quantity)" class="form-control form-control-line  col-md-5" [(ngModel)]="item.stock_quantity" name="stock_quantity">
+                                        <select class="form-control form-control-line col-md-3" placeholder="Choose Unit"  [(ngModel)]="item.unit">
+                                                <option>None</option>
+                                                 <option>Kg</option>
+                                                 <option>G</option>
+                                                 <option>Litre</option>
+                                             </select>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <input type="number" placeholder="Enter price" class="form-control form-control-line" [(ngModel)]="item.price" name="price">
-                                       
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                        <div class="col-md-12">
-                                              
-                                            <input type="number" placeholder="Enter number of items(Quantity)" class="form-control form-control-line" [(ngModel)]="item.stock_quantity" name="stock_quantity">
-                                          
-                                        </div>
-                                    </div>
-                                    <!-- <div class="form-group">
-                                            <div class="input-group">
-                                              <input class="form-control form-control-line" placeholder="Expired Date" name="expiry_date" [(ngModel)]="item.expiry_date" ngbDatepicker #d="ngbDatepicker">
-                                              <button class="input-group-addon" (click)="d.toggle()" type="button">
-                                                <span class="mdi mdi-calendar"></span>
-                                              </button>
-                                            </div>
-                                       </div>   -->
+                                  
 
-                                    <div class="form-group">
-                                            <div class="col-md-12">
-                                              <input class="form-control form-control-line" placeholder="Expired Date" name="expiry_date" [(ngModel)]="item.expiry_date">
-                                             
-                                            </div>
+                                    <div class="row clearfix form-group">
+                                            <label class="col-md-4">Expired date:</label>
+                                            <input type="date"  class="form-control form-control-line  col-md-8" placeholder="Expired Date" name="expiry_date" [(ngModel)]="item.expiry_date">
+
                                        </div>  
                                       
                              
                                
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <select class="form-control form-control-line" [(ngModel)]="item.category">
+                                <div class="row clearfix">
+                                        <label class="col-md-4">Category:</label>
+                                        <select class="form-control form-control-line col-md-8" [(ngModel)]="item.category">
                                             <option>Choose Category</option>
                                             <option>Food</option>
                                             <option>Tea</option>
                                             <option>Coffe</option>
                                         </select>
                                       
-                                        
-                                    </div>
                                 </div>
+                                <hr />
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <span *ngIf="isNull">
@@ -71,15 +79,17 @@
                                             <div class="alert alert-danger alert-dismissable">
                                             <a class="close" (click)="onClose()">&times;</a>
                                                             
-                                            <span *ngIf="isnameNull">* Please, fill item name!<br /></span>
-                                            <span *ngIf="ispriceNull">* Please, fill item price! <br /></span>
-                                            <span *ngIf="isstock_quantityNull">* Please, fill number of items(Quantity)!<br /></span>
+                                            <span *ngIf="isnameNull">* Please, item name is required!<br /></span>
+                                            <span *ngIf="ispriceNull">* Please, item price is required! <br /></span>
+                                            <span *ngIf="isstock_quantityNull">* Please,number of items(Quantity) is required!<br /></span>
                                             <span *ngIf="iscategoryNull"> * Please, choose category!<br /></span>
-
+                                            <span *ngIf="iscurrencyNull"> * Please, choose currency!<br /></span>
+                                            <span *ngIf="isunitNull"> * Please, choose uint!<br /></span>
                                             </div> 
                                         </span>
                                         <button class="col-sm-12 btn btn-info btn-sm" (click)="onSaveItem()" >Save</button>
                                     </div>
+                                   
                                 </div>
                         </div>
                 </div>

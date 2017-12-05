@@ -33,7 +33,10 @@ import { UiModules } from 'app/ui/shared/ui.module';
 import { AuthGuard } from 'app/core/auth.guard';
 import { SplashComponent } from 'app/splashScreen/splashscreen.component';
 import { FooterComponent } from 'app/footer/footer.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { keyGeneratorService } from 'app/services/keyGenerater.service';
+import { InvoiceService } from 'app/services/Invoice.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +55,8 @@ import { FooterComponent } from 'app/footer/footer.component';
     SplashComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    MatCheckboxModule,
     SharedModule,
     UiModules,
     CoreModule,
@@ -64,7 +69,7 @@ import { FooterComponent } from 'app/footer/footer.component';
     NgxQRCodeModule
 
  ],
- providers: [ItemsService,ItemsInStockService,AddCartService,ModalService,BarcodeScanner,AuthGuard],
+ providers: [ItemsService,ItemsInStockService,AddCartService,ModalService,BarcodeScanner,AuthGuard,keyGeneratorService,InvoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,6 +32,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AddCartId, AddCart } from 'app/interface/add_cart';
 import { AddCartService } from 'app/services/addCart.service';
+import { keyGeneratorService } from 'app/services/keyGenerater.service';
                 
                 @Component({
                 selector: 'AddCartItems',
@@ -39,37 +40,23 @@ import { AddCartService } from 'app/services/addCart.service';
                 styleUrls: ['./addcart.component.css'],
                 })
                 export class AddCartComponent implements OnInit {
-                    totalqty: number;
+                   
                     vat: number=18;
-                    TotalTax: any;
-                    totalPrice: number;
-                    finalTotal:number;
-                    nums: number;
+                
                     showSpinner: boolean;
                     isNull: boolean=false;
                 
                        carts:Observable<AddCartId[]>;
-                       cartsn:Observable<AddCartId[]>;
                        @Input() 
                        cartItem: AddCart;
-                       constructor(private itemsService: ItemsService, private cartService: AddCartService,private route: ActivatedRoute,private router: Router,private location: Location) {
+                       constructor(private keycode:keyGeneratorService,private itemsService: ItemsService, private cartService: AddCartService,private route: ActivatedRoute,private router: Router,private location: Location) {
                        
                         
                        }
                         ngOnInit() {
-                            this.cartService.snapshotChanges().subscribe(cart=> this.nums=cart.length);
                             this.carts = this.cartService.snapshotChanges();
-                           
-                        }
-                        getTotal(price, soldqty){
+                           }
                       
-                            this.totalqty +=  soldqty;            
-                            this.totalPrice+=  price;
-                          this.finalTotal=this.totalPrice*this.totalqty;
-                          this.TotalTax=(this.finalTotal*this.vat)/100;
-
-                         // return "tr";
-                        }
 
                        onClose(){
                            this.isNull=false;

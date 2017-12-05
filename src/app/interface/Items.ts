@@ -7,5 +7,11 @@ export interface Items {
     recorded_date:Date;
     sold_quantity:number;
     stock_quantity:number;
-    baranchid?:number; }
+    branch_id?:string;
+    qrcode:string;
+    currency:string;
+    unit:string;
+    
+
+ }
 export interface ItemId extends Items { itemid: string;source:string }

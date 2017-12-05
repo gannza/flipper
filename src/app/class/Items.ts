@@ -9,6 +9,10 @@ export class newItems {
     stock_quantity:number;
     itemid:string;
     id:number;
+    branch_id?:string;
+    qrcode:string;
+    currency:string;
+    unit:string;
 
 
 }

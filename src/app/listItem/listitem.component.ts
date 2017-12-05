@@ -6,6 +6,9 @@ import { ItemsService } from 'app/services/item.service';
 import { Router } from '@angular/router';
 import { ModalService } from 'app/services/modal.service';
 import { AddCartService } from 'app/services/addCart.service';
+import { keyGeneratorService } from 'app/services/keyGenerater.service';
+import { InvoiceService } from 'app/services/Invoice.service';
+import { Invoice } from 'app/class/invoice';
 
 @Component({
   moduleId: module.id.toString(),
@@ -14,22 +17,31 @@ import { AddCartService } from 'app/services/addCart.service';
   styleUrls: ['./listitem.component.css'],
 })
 export class ListItemsComponent implements OnInit {
+    invoicedate: string;
+    invoiceNumber: string;
+
+    invoice_id: number;
+    num_invoice: number;
+
     cart: {};
     showbtnbyitemid: any;
  items: Observable<ItemId[]>;
  showSpinner = true;
  num_stock_quantity:number;
  percentage:any;
-  constructor(private itemsService: ItemsService, private router: Router,private modalService: ModalService,private addcart:AddCartService){
-	
+ @Input() invoices_change: Invoice;
+  constructor(private keycode:keyGeneratorService,private invoice:InvoiceService,private itemsService: ItemsService, private router: Router,private modalService: ModalService,private addcart:AddCartService){
+	this.invoices_change = new Invoice;
  }
 
 
     ngOnInit() {
+       
         this.items = this.itemsService.snapshotChanges();
         if(this.items){
              this.showSpinner = false;
         }
+        this.getInvoiceNotDone();
            
        
     }
@@ -105,24 +117,83 @@ export class ListItemsComponent implements OnInit {
         this.num_stock_quantity=null;
     }
 
+    getKey(){
+        this.invoiceNumber='INVC-'+this.keycode.generatecode();
+    }
+    getReceipttime(){
+        this.invoicedate=this.keycode.getDateTime();
+    }
+  
+   getInvoiceNotDone(){
+       this.invoice.get_transction_done().subscribe(invoices=>{
+        this.num_invoice=invoices.length;
+       
+        if(this.num_invoice > 0){
+        this.invoices_change.invoice_number=invoices[0].invoice_number;
+        this.invoices_change.customer_number=invoices[0].customer_number;
+        this.invoices_change.date_time=invoices[0].date_time;
+        this.invoices_change.total_amount_paid=invoices[0].total_amount_paid;
+        this.invoices_change.total_amount_vat_paid=invoices[0].total_amount_vat_paid;
+        this.invoices_change.number_items=invoices[0].number_items;
+        this.invoices_change.branch_id=invoices[0].branch_id;
+        this.invoices_change.user_id=invoices[0].user_id;
+        this.invoices_change.invid=invoices[0].id;
+
+        }
+       }
+    );
+   }
     
+
     AddCart(items){
-    
+
+    this.getInvoiceNotDone();
+   
      if(this.num_stock_quantity && this.num_stock_quantity !=null){
-       this.cart={ 
-        item_id:items.itemid,
-        item_name:items.name,
-        out_quantity:this.num_stock_quantity,
-        price:items.price,
-        category:items.category,
-        currency:'Rwf',
-        user_id:'1'
-    };
+      
     if((items.sold_quantity > this.num_stock_quantity) || (items.sold_quantity!==0)){
 
         items.sold_quantity=items.sold_quantity-this.num_stock_quantity;
+
+        if(this.num_invoice == 0){
+
+            this.invoices_change.invoice_number='INVC-'+this.keycode.generatecode();
+            this.invoices_change.date_time=this.keycode.getDateTime();
+            this.invoices_change.total_amount_paid=items.price*this.num_stock_quantity;
+            this.invoices_change.total_amount_vat_paid=(this.invoices_change.total_amount_paid)*18/100;
+            this.invoices_change.number_items=1;
+            this.invoices_change.customer_number=null;
+            this.invoices_change.branch_id='1';
+            this.invoices_change.user_id='1';
+            this.invoices_change.is_transction_done=false;
+            this.invoice.create(this.invoices_change);  
+     
+        }else{
+            this.invoices_change.invoice_number=this.invoices_change.invoice_number;
+            this.invoices_change.date_time=this.invoices_change.date_time;
+            this.invoices_change.total_amount_paid=this.invoices_change.total_amount_paid+items.price*this.num_stock_quantity;
+            this.invoices_change.total_amount_paid=(this.invoices_change.total_amount_paid)*18/100;
+            this.invoices_change.number_items= this.invoices_change.number_items+1;
+            this.invoices_change.customer_number=null;
+            this.invoices_change.branch_id='1';
+            this.invoices_change.user_id='1';
+            this.invoices_change.is_transction_done=false;
+
+            
+console.log(this.invoices_change);
+            this.invoice.updateInvoices(this.invoices_change.invid,this.invoices_change);  
+        }
+
         
-         if(this.addcart.create(this.cart)){
+         if(this.addcart.create({ 
+            item_id:items.itemid,
+            item_name:items.name,
+            out_quantity:this.num_stock_quantity,
+            price:items.price,
+            category:items.category,
+            currency:'Rwf',
+            user_id:'1'
+        })){
 
              this.itemsService.updateItem(items.itemid,items);
              this.num_stock_quantity=null;

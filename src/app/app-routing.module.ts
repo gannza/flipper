@@ -22,8 +22,9 @@ const Routes: Routes = [
     { path: 'qrcode', component: QRCode},
     { path: 'editItems/:id', component: EditItemsComponent},
     { path: 'IncreaseItems/:id', component: InscreaseItemsComponent},
-    { path: '**', pathMatch:'full', redirectTo: 'box' },
-    // { path: 'login', component: UserLoginComponent },
+    
+    { path: 'login', component: UserLoginComponent },
+    { path: 'splash', component: SplashComponent },
     // { path: 'box', component: DashboardComponent, canActivate: [AuthGuard] },
     // { path: 'items', component: ItemsComponent, canActivate: [AuthGuard] },
     // { path: 'addItems', component: AddItemsComponent, canActivate: [AuthGuard] },
@@ -31,7 +32,8 @@ const Routes: Routes = [
     // { path: 'qrcode', component: QRCode, canActivate: [AuthGuard] },
     // { path: 'editItems/:id', component: EditItemsComponent, canActivate: [AuthGuard] },
     // { path: 'IncreaseItems/:id', component: InscreaseItemsComponent, canActivate: [AuthGuard] },
-    // { path: '**', pathMatch:'full', redirectTo: 'box' }
+
+    { path: '**', pathMatch:'full', redirectTo: 'box' }
     
     
    

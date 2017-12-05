@@ -110,7 +110,6 @@ import { Location } from '@angular/common';
                         
                    if( this.itemsService.updateItem(this.itemId,this.item) ){
                       
-                         alert('successfully modified!');
                          this.isNull = false;
                          this.item = new newItems;
                          return this.location.back();

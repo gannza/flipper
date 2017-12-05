@@ -8,4 +8,4 @@ export interface AddCart {
     cart_id:string
     user_id:string;
  }
-export interface AddCartId extends AddCart { cart_id: string; }
+export interface AddCartId extends AddCart { cart_id: string }

@@ -12,14 +12,30 @@ import { Router } from '@angular/router';
   templateUrl:'./splashscreen.component.html',
   styleUrls: ['./splashscreen.component.css']
 })
-export class SplashComponent {
-  
+export class SplashComponent implements OnInit{
+  public loadingText="Loading";
+  private timeSplash=0;
+  private count =0;
 constructor(private router: Router){
-    this.loadSplash();
-}
-    loadSplash(){
-
-        setInterval(this.router.navigate(['box']), 2000);
    
+}
+ngOnInit() { this.loadSplash() }
+    loadSplash(){
+   setInterval(()=>{
+       if(this.timeSplash<8000){
+           this.timeSplash+=400;
+           if(this.count===3){
+            this.count=0;
+            this.loadingText="Loading";
+
+           }else{
+               this.loadingText+=".";
+               this.count++;
+           }
+
+       }else{
+           this.router.navigate(['box',{clearHistory:true}]);
+       }
+   },400);
     }
 }
