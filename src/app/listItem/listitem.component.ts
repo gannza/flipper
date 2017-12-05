@@ -137,8 +137,8 @@ export class ListItemsComponent implements OnInit {
         this.invoices_change.number_items=invoices[0].number_items;
         this.invoices_change.branch_id=invoices[0].branch_id;
         this.invoices_change.user_id=invoices[0].user_id;
-        this.invoices_change.invid=invoices[0].id;
-
+        this.invoices_change.invid='6YXiXfgezA5BBigmTBxq';
+        
         }
        }
     );
@@ -166,22 +166,27 @@ export class ListItemsComponent implements OnInit {
             this.invoices_change.branch_id='1';
             this.invoices_change.user_id='1';
             this.invoices_change.is_transction_done=false;
-            this.invoice.create(this.invoices_change);  
      
         }else{
             this.invoices_change.invoice_number=this.invoices_change.invoice_number;
             this.invoices_change.date_time=this.invoices_change.date_time;
             this.invoices_change.total_amount_paid=this.invoices_change.total_amount_paid+items.price*this.num_stock_quantity;
-            this.invoices_change.total_amount_paid=(this.invoices_change.total_amount_paid)*18/100;
+            this.invoices_change.total_amount_vat_paid=(this.invoices_change.total_amount_paid)*18/100;
             this.invoices_change.number_items= this.invoices_change.number_items+1;
             this.invoices_change.customer_number=null;
             this.invoices_change.branch_id='1';
             this.invoices_change.user_id='1';
             this.invoices_change.is_transction_done=false;
 
-            
-console.log(this.invoices_change);
-            this.invoice.updateInvoices(this.invoices_change.invid,this.invoices_change);  
+        
+            this.invoice.updateInvoices(this.invoices_change.invid,
+            {
+                number_items:this.invoices_change.number_items,
+                total_amount_paid:this.invoices_change.total_amount_paid,
+                total_amount_vat_paid:  this.invoices_change.total_amount_vat_paid
+
+
+            });  
         }
 
         

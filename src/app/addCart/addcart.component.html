@@ -39,7 +39,7 @@
                                             <th>{{item.item_name}}<b style="font-size:9px" *ngIf="item.category!='' || item.category!='Choose Category'">({{item.category}})</b> </th>
                                             <th>{{item.price}} </th>
                                             <th>{{item.out_quantity}}</th>
-                                            <th [ngClass]="getTotal(item.price,item.out_quantity)">{{item.price*item.out_quantity}} </th>
+                                            <th>{{item.price*item.out_quantity}} </th>
                                           </tr>
                                         
                                         </table>

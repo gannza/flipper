@@ -11,4 +11,4 @@ export interface Invoices {
     user_id:string;
     id:string
  }
- export interface InvoiceId extends Invoices { id: string }
+ export interface InvoiceId extends Invoices { invid: string }

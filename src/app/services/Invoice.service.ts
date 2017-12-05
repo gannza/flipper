@@ -53,7 +53,7 @@ export class InvoiceService {
    
  }
 
-  updateInvoices(id: string, data: Partial<Invoices>) {
+  updateInvoices(id: string, data) {
     return this.getInvoices(id).update(data);
   }
 
