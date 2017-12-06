@@ -37,6 +37,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { keyGeneratorService } from 'app/services/keyGenerater.service';
 import { InvoiceService } from 'app/services/Invoice.service';
+import { ElectronService } from 'app/providers/electron.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,7 @@ import { InvoiceService } from 'app/services/Invoice.service';
     NgxQRCodeModule
 
  ],
- providers: [ItemsService,ItemsInStockService,AddCartService,ModalService,BarcodeScanner,AuthGuard,keyGeneratorService,InvoiceService],
+ providers: [ElectronService,ItemsService,ItemsInStockService,AddCartService,ModalService,BarcodeScanner,AuthGuard,keyGeneratorService,InvoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
