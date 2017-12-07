@@ -9,7 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { DashboardComponent } from 'app/DashBoard/dashboard.component';
-import { appRouting } from 'app/app-routing.module';
+
 import { firebaseFirestoreConfig } from 'app/firebaseconfig/firebase';
 import { ItemsComponent } from 'app/items/items.component';
 import { NavTopComponent } from 'app/nav_Top/nav.component';
@@ -38,6 +38,7 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import { keyGeneratorService } from 'app/services/keyGenerater.service';
 import { InvoiceService } from 'app/services/Invoice.service';
 import { ElectronService } from 'app/providers/electron.service';
+import { AppRoutingModule } from 'app/app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,7 @@ import { ElectronService } from 'app/providers/electron.service';
     CoreModule,
     BrowserModule,
     FormsModule, // <-- here
-    appRouting,
+    AppRoutingModule,
     AngularFireModule.initializeApp(firebaseFirestoreConfig.firebase),
     AngularFirestoreModule.enablePersistence(),
     NgbModule.forRoot(),

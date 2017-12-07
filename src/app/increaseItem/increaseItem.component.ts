@@ -102,12 +102,8 @@ export class InscreaseItemsComponent implements OnInit {
         this.isstock_quantityNull = true;
         this.isNull = true;
     }
-
     this.item.sold_quantity = this.number_quantity + this.item.sold_quantity;
-
     this.item.stock_quantity = this.number_quantity + this.item.stock_quantity;
-
-
     if (this.item && this.item !== null) {
 
         if (this.itemsService.updateItem(this.itemId, this.item)) {
