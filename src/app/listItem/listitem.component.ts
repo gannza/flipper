@@ -137,7 +137,7 @@ export class ListItemsComponent implements OnInit {
         this.invoices_change.number_items=invoices[0].number_items;
         this.invoices_change.branch_id=invoices[0].branch_id;
         this.invoices_change.user_id=invoices[0].user_id;
-        this.invoices_change.invid='6YXiXfgezA5BBigmTBxq';
+        this.invoices_change.invoiceId=invoices[0].invoiceId;
         
         }
        }
@@ -149,9 +149,9 @@ export class ListItemsComponent implements OnInit {
 
     this.getInvoiceNotDone();
    
-     if(this.num_stock_quantity && this.num_stock_quantity !=null){
+     if(this.num_stock_quantity && this.num_stock_quantity !=null  && this.num_stock_quantity >0){
       
-    if((items.sold_quantity > this.num_stock_quantity) || (items.sold_quantity!==0)){
+    if((items.sold_quantity > this.num_stock_quantity) && (items.sold_quantity > 0) ){
 
         items.sold_quantity=items.sold_quantity-this.num_stock_quantity;
 
@@ -179,7 +179,7 @@ export class ListItemsComponent implements OnInit {
             this.invoices_change.is_transction_done=false;
 
         
-            this.invoice.updateInvoices(this.invoices_change.invid,
+            this.invoice.updateInvoices(this.invoices_change.invoiceId,
             {
                 number_items:this.invoices_change.number_items,
                 total_amount_paid:this.invoices_change.total_amount_paid,

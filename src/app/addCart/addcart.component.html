@@ -1,92 +1,181 @@
 <div class="row" style="height:auto;background:#fff;">
-        
-          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" style="margin-top:-0.5%;
+
+  <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4" style="margin-top:-0.5%;
                   height: 100%;
                   top: 0px; bottom: 0px;  left: 0px;
                   padding-top:10px;">
-        
-            <div class="card-block">
-        
-              <h4 class="card-title pull-left" style="text-align:center;margin-top:1%;margin-left:5%">Cart Items </h4>
-              <div class="pull-right">
-                <button type="button" (click)="onGoBack()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
-                  <i class="mdi mdi-close"></i>
-                </button>
-              </div>
-        
-            </div>
-            <div class="card-block">
-              <div class="form-horizontal form-material">
-                  <hr />
-                  <span style="font-weight:bold;text-align:center;font-size:14px">Flipper Ltd<br />
-                    KIGALI CITY,AVENUE KIYOVU,KN 41 ST 12<br />Tel:(+250) 781945189
-                <br />eMail:respinho2014@gmail.com<br />TIN:10101010103</span>
-               
-                                        <table class="table" style="font-size:13px">
-                                             
-                                              <tr style="border-bottom:dotted">
-                                                <th>Name </th>
-                                                <th>Price </th>
-                                                <th>Quantity</th>
-                                                <th>Amount</th>
-                                              </tr>
-                                            
-                                              </table>
-                                        <div class="message-box contact-box scrollbar-deep-gray bordered-deep-gray thin" style="height:30vh;overflow-y: auto;">
-                                        <table  class="table" style="font-size:14px">
-                                       
-                                          <tr *ngFor="let item of carts | async" style="border-bottom:dotted">
-                                            <th>{{item.item_name}}<b style="font-size:9px" *ngIf="item.category!='' || item.category!='Choose Category'">({{item.category}})</b> </th>
-                                            <th>{{item.price}} </th>
-                                            <th>{{item.out_quantity}}</th>
-                                            <th>{{item.price*item.out_quantity}} </th>
-                                          </tr>
-                                        
-                                        </table>
-                                       
-                                       
-                                        </div>
 
-                                        <table class="table" style="font-size:12px">
-                                            
-                                                   <tr>
-                                                           <th>ToTAL: </th>
-                                                           <th> </th>
-                                                           <th></th>
-                                                           <th></th>
-                                                   </tr>
-                                                   <tr style="border-bottom:dotted">
-                                                           <th>ToTAL TAX:</th>
-                                                           <th> </th>
-                                                           <th></th>
-                                                           <th></th>
-                                                   </tr>
-                                                   <tr>
-                                                           <th>CASH:</th>
-                                                           <th> </th>
-                                                           <th></th>
-                                                           <th></th>
-                                                   </tr>
-                                                   <tr  style="border-bottom:dotted">
-                                                           <th>ITEMS NUMBER:</th>
-                                                           <th> </th>
-                                                           <th></th>
-                                                           <th></th>
-                                                   </tr>
-                                                   
-                                         </table>
-                                      
-              </div>
-            </div>
-          </div>
-        
-          <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" style="height: 100%;
-                   top: 0px; bottom: 0px;  left: 0px;border-left:solid thin #ccc">
-        
-            <ListItems></ListItems>
-        
-          </div>
-        
-        
+    <div class="card-block">
+
+      <h4 class="card-title pull-left" style="text-align:center;margin-top:1%;margin-left:5%">Cart Items </h4>
+      <div class="pull-right">
+        <button type="button" (click)="onGoBack()" class="btn btn-circle btn-lg btn-default waves-effect waves-dark">
+          <i class="mdi mdi-close"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="card-block">
+      <button (click)="onSaveAndPrintCommand()">Save</button>
+      <div class="form-horizontal form-material">
+
+        <table class="table" style="font-size:12px">
+
+          <tr style="border-bottom:dotted">
+            <th>Name </th>
+            <th>Price </th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+
+        </table>
+        <div class="message-box contact-box scrollbar-deep-gray bordered-deep-gray thin" style="height:30vh;overflow-y: auto;">
+          <table class="table" style="font-size:13px">
+
+            <tr *ngFor="let item of carts | async" style="border-bottom:dotted">
+              <th>{{item.item_name}}
+                <b style="font-size:9px" *ngIf="item.category!='' || item.category!='Choose Category'">({{item.category}})</b>
+              </th>
+              <th>{{item.price}} </th>
+              <th>{{item.out_quantity}}</th>
+              <th>{{item.price*item.out_quantity}} </th>
+            </tr>
+
+          </table>
+
+
         </div>
-        
+
+        <table class="table" style="font-size:12px">
+
+          <tr>
+            <th>Recpt No:{{invoices_change.invoice_number}} </th>
+            <th> </th>
+            <th></th>
+            <th>Date:{{invoices_change.date_time}}</th>
+          </tr>
+          <tr>
+            <th>Total: </th>
+            <th> </th>
+            <th></th>
+            <th style="font-size:14px">{{invoices_change.total_amount_paid}}</th>
+          </tr>
+          <tr>
+            <th>Total Tax:</th>
+            <th>x 18%</th>
+            <th></th>
+            <th style="font-size:14px">{{invoices_change.total_amount_vat_paid}}</th>
+          </tr>
+          <tr style="border-bottom:dotted">
+            <th>CASH:</th>
+            <th> </th>
+            <th></th>
+            <th style="font-size:14px">{{invoices_change.total_amount_paid}}</th>
+          </tr>
+          <tr style="border-bottom:dotted">
+            <th>ITEMS NUMBER:</th>
+            <th> </th>
+            <th></th>
+            <th>{{invoices_change.number_items}}</th>
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+
+
+    <modal id="model-printInvo">
+      <div class="flippermdmodalDialog">
+
+          <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Print Recipt</h5>
+                  <button type="button" class="close" (click)="closeModal('printInvo');" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body scrollbar-deep-gray bordered-deep-gray thin" style="height:auto;overflow-y: auto;">
+               
+                    <span style="font-weight:bold;text-align:center;font-size:12px">Flipper Ltd
+                      <br /> KIGALI CITY,AVENUE KIYOVU,KN 41 ST 12
+                      <br />Tel:(+250) 781945189
+                      <br />eMail:respinho2014@gmail.com
+                      <br />TIN:10101010103
+                    </span>
+                    <hr />
+
+                    <table class="table" style="font-size:12px">
+                      <tr>
+                        <th>Recpt No:{{invoices_change.invoice_number}} </th>
+                        <th>Date:{{invoices_change.date_time}} </th>
+                      </tr>
+
+                      <tr style="border-bottom:dotted">
+                        <th>Name </th>
+                        <th>Price </th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                      </tr>
+
+                      <tr *ngFor="let item of carts | async" style="border-bottom:dotted">
+                        <th>{{item.item_name}}
+                          <b style="font-size:9px" *ngIf="item.category!='' || item.category!='Choose Category'">({{item.category}})</b>
+                        </th>
+                        <th>{{item.price}} </th>
+                        <th>{{item.out_quantity}}</th>
+                        <th>{{item.price*item.out_quantity}} </th>
+                      </tr>
+
+                      <tr>
+                        <th>Total: </th>
+                        <th> </th>
+                        <th></th>
+                        <th style="font-size:14px">{{invoices_change.total_amount_paid}}</th>
+                      </tr>
+                      <tr>
+                        <th>Total Tax:</th>
+                        <th>x 18%</th>
+                        <th></th>
+                        <th style="font-size:14px">{{invoices_change.total_amount_vat_paid}}</th>
+                      </tr>
+                      <tr style="border-bottom:dotted">
+                        <th>CASH:</th>
+                        <th> </th>
+                        <th></th>
+                        <th style="font-size:14px">{{invoices_change.total_amount_paid}}</th>
+                      </tr>
+                      <tr style="border-bottom:dotted">
+                        <th>ITEMS NUMBER:</th>
+                        <th> </th>
+                        <th></th>
+                        <th>{{invoices_change.number_items}}</th>
+                      </tr>
+
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Print</button>
+                  <button type="button" class="btn btn-secondary" (click)="closeModal('printInvo');">Close</button>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="flippermodal-background1"></div>
+    </modal>
+
+  </div>
+
+  <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8" style="height: 100%;
+                   top: 0px; bottom: 0px;  left: 0px;border-left:solid thin #ccc">
+
+    <ListItems></ListItems>
+
+  </div>
+
+
+</div>
+

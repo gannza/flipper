@@ -5,33 +5,33 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { AddCart } from 'app/interface/add_cart';
+import { Payments } from 'app/interface/payment';
 
 @Injectable()
-export class AddCartService {
+export class PaymentService {
   
-  itemsCollection: AngularFirestoreCollection<AddCart>;
-  itemDocument:   AngularFirestoreDocument<AddCart>;
+  itemsCollection: AngularFirestoreCollection<Payments>;
+  itemDocument:   AngularFirestoreDocument<Payments>;
 
   constructor(private afs: AngularFirestore) {
-    this.itemsCollection = this.afs.collection<AddCart>('carts_items', (ref) => ref.orderBy('out_quantity', 'desc'));
+    this.itemsCollection = this.afs.collection<Payments>('payments', (ref) => ref.orderBy('payment_date', 'desc'));
   }
 
-  getData(): Observable<AddCart[]> {
+  getData(): Observable<Payments[]> {
     return this.itemsCollection.valueChanges();
   }
   snapshotChanges(){
     return this.itemsCollection.snapshotChanges().map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as AddCart;
-          const cart_id = a.payload.doc.id;
-          return { cart_id, ...data };
+          const data = a.payload.doc.data() as Payments;
+          const itemid = a.payload.doc.id;
+          return { itemid, ...data };
         });
       });
 }
 
   getItem(id: string) {
-    return this.afs.doc<AddCart>(`carts_items/${id}`);
+    return this.afs.doc<Payments>(`payments/${id}`);
   }
 
 
@@ -42,7 +42,7 @@ export class AddCartService {
    
  }
 
-  updateItem(id: string, data: Partial<AddCart>) {
+  updateItem(id: string, data: Partial<Payments>) {
     return this.getItem(id).update(data);
   }
 

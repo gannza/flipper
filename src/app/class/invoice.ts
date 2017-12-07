@@ -1,5 +1,5 @@
 export class Invoice{    
-    invid: string;
+    invoiceId: string;
     invoice_number:string; 
     branch_id:string;
     customer_number?:string;

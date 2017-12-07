@@ -22,8 +22,8 @@ export class InvoiceService {
     return this.InvoicesCollection.snapshotChanges().map(actions => {
                 return actions.map(a => {
                   const data = a.payload.doc.data() as Invoices;
-                  const Invoicesid = a.payload.doc.id;
-                  return { Invoicesid, ...data };
+                  const invoiceId = a.payload.doc.id;
+                  return { invoiceId, ...data };
                 });
               });
   }

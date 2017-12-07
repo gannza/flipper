@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-import * as JQuery from 'jquery';
 import * as $ from 'jquery';
 import { ModalService } from 'app/services/modal.service';
  

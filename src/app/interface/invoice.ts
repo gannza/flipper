@@ -1,5 +1,5 @@
 export interface Invoices { 
-    invid:string;
+    invoiceId:string;
     invoice_number:string; 
     branch_id:string;
     customer_number?:string;
@@ -11,4 +11,4 @@ export interface Invoices {
     user_id:string;
     id:string
  }
- export interface InvoiceId extends Invoices { invid: string }
+ export interface InvoiceId extends Invoices { invoiceId: string }
