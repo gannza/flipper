@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, Tray  } from 'electron';
+import { app, BrowserWindow, screen, Tray,remote,ipcRenderer  } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -8,6 +8,9 @@ import * as url from 'url';
 let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
+
+ 
+
 
 // const server = 'https://hazel-server-xkyowwynpr.now.sh';
 // const feed = `${server}/update/${process.platform}/${app.getVersion()}`
@@ -66,10 +69,10 @@ function createWindow() {
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: 1000,
-    height: 700
+    frame: false,
+    width: 1200,
+    height:750,
+    icon:'./favicon.ico'   
   });
 
   if (serve) {

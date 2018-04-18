@@ -9,6 +9,7 @@ import { AppConfig } from './app.config';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  body: string;
   constructor(public electronService: ElectronService,
     private translate: TranslateService) {
 
@@ -21,6 +22,14 @@ export class AppComponent {
       console.log('NodeJS childProcess', electronService.childProcess);
     } else {
       console.log('Mode web');
+    }
+    this.windowCustome();
+  }
+  windowCustome(){
+    if(this.electronService.isElectron()){
+      this.body="desktop_body";
+    }else{
+      this.body="web_body"; 
     }
   }
 }

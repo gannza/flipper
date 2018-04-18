@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
- <div class="col-sm-5 side">
+ <div class="col-sm-5 {{side}}">
+   
       <div class="heading_bar">
           <div class="row">
         <div class="col-sm-6 col-xs-6 heading-avatar">
@@ -23,13 +24,16 @@
                 </span>
         </div>
         <div class="col-sm-2 col-xs-2 pull-right">
-            <span class="menu_icons" [matMenuTriggerFor]="appMenu">
-                    <img class="pull-right" style="width:32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADiSURBVGhD7dRLDgFBGEXhNjVkyF5YAHZhQiyLicd+iDUIpiTcm+6BVIh6DCRyvuQkHUl1Ff23CgAAAAAA4NdaqltfZmk35fLePkORhTqrhzqqoYrlA+zUvcnXKT+I9/Ke3ttn8FmyTJRv8tpF9VSMrQrXb1SMvrqqcP1YJVup8EZuqr7xKPkphGtvKmbMvEe41i1Vsr/5Iu9Gy7MaO1oeo3B9ymh5jMP1I5Vlrk7KN9mrgYrlF9vviZ+CWzefxfLLflDe22eYqSL+6+vUl1k8SjHj9In3Lv77BQAAAAAAKFBVTwgLWVq1rdBsAAAAAElFTkSuQmCC">
-          </span>
-          <mat-menu #appMenu="matMenu">
-          <button mat-menu-item>Settings</button>
-          <button mat-menu-item>Help</button>
-        </mat-menu>
+            <span class="menu_icons dropdown">
+                    <img class="pull-right dropdown-toggle" data-toggle="dropdown" style="width:32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADiSURBVGhD7dRLDgFBGEXhNjVkyF5YAHZhQiyLicd+iDUIpiTcm+6BVIh6DCRyvuQkHUl1Ff23CgAAAAAA4NdaqltfZmk35fLePkORhTqrhzqqoYrlA+zUvcnXKT+I9/Ke3ttn8FmyTJRv8tpF9VSMrQrXb1SMvrqqcP1YJVup8EZuqr7xKPkphGtvKmbMvEe41i1Vsr/5Iu9Gy7MaO1oeo3B9ymh5jMP1I5Vlrk7KN9mrgYrlF9vviZ+CWzefxfLLflDe22eYqSL+6+vUl1k8SjHj9In3Lv77BQAAAAAAKFBVTwgLWVq1rdBsAAAAAElFTkSuQmCC">
+        
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Link 1</a>
+                      <a class="dropdown-item" href="#">Link 2</a>
+                      <a class="dropdown-item" href="#">Link 3</a>
+                    </div>
+              </span>
+        
         </div>
         </div>
       </div>
@@ -253,7 +257,7 @@
       
       
       </div>
-   
+    
 
-  
+     
   </div>

@@ -2,14 +2,69 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Flipper</title>
-  <base href="./">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   
+  <title>Flipper</title>
+  <base href="./">
+  
 </head>
 <body>
-  <app-root>Loading...</app-root>
+    <script>
+        const { remote,ipcRenderer } = require('electron');
+        const ElectronTitlebarWindows = require('electron-titlebar-windows');
+    
+        /** Options */
+        let titlebar = new ElectronTitlebarWindows({
+            darkMode: true,
+            color: '#fff',
+            backgroundColor: '#1e88e5',
+            draggable: true,
+            fullscreen: false
+        });
+    
+        /**
+         * DOM
+         */
+        titlebar.appendTo();
+    
+        /** Event#close */
+        titlebar.on('close', () => {
+            console.info('close');
+    
+            remote.getCurrentWindow().close();
+        });
+    
+        /** Event#fullscreen */
+        titlebar.on('fullscreen', () => {
+            console.info('fullscreen');
+    
+            remote.getCurrentWindow().setFullScreen(true);
+        });
+    
+        /** Event#minimize */
+        titlebar.on('minimize', () => {
+            console.info('minimize');
+    
+            remote.getCurrentWindow().minimize();
+        });
+    
+        /** Event#maximize */
+        titlebar.on('maximize', () => {
+            console.info('maximize');
+    
+            remote.getCurrentWindow().maximize();
+            remote.getCurrentWindow().setFullScreen(false);
+        });
+
+
+    </script>
+  <app-root>
+    <div style="width:100%;height:100%;background:#eee;">
+    <div style="position: relative;top:35%;left:40%;padding:0px; margin:0px">
+      <img src="assets/img/preloader.gif" style="width:300px" alt="preloader">
+    </div>
+    </div>
+  </app-root>
 </body>
 </html>
