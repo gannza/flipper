@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen, Tray,remote,ipcRenderer  } from 'electron';
+import { app, BrowserWindow, screen,remote,ipcRenderer,Menu,Tray,ipcMain  } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -8,8 +8,32 @@ import * as url from 'url';
 let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
-
+let tray=null;
+const iconPath = path.join(__dirname, './favicon.png');
  
+const contextMenu = Menu.buildFromTemplate([
+  {label: 'System info', type: 'radio', 
+  click(){
+  //  win.loadURL(`file://${__dirname}/index.html/box`);
+  }
+}
+,{ label: 'FeedBack', type: 'radio', 
+
+  click () { 
+    require('electron').shell.openExternal('http://localhost:4200/feedback') 
+    }
+},
+  {label: 'Exit', type: 'radio', 
+  click(){
+      app.quit();
+  }
+}
+
+  // {label: 'Item2', type: 'radio'},
+  // {label: 'Item3', type: 'radio', checked: true},
+  // {label: 'Item4', type: 'radio'}
+])
+
 
 
 // const server = 'https://hazel-server-xkyowwynpr.now.sh';
@@ -63,7 +87,7 @@ try {
 }
 
 function createWindow() {
-
+  tray = new Tray(iconPath)
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
@@ -72,7 +96,7 @@ function createWindow() {
     frame: false,
     width: 1200,
     height:750,
-    icon:'./favicon.ico'   
+    icon:iconPath   
   });
 
   if (serve) {
@@ -86,6 +110,14 @@ function createWindow() {
       slashes: true
     }));
   }
+
+  ipcMain.on('windowSetting',(winSet)=>{
+    
+    console.log(winSet);
+    })
+  tray.setToolTip('Flipper');
+  
+  tray.setContextMenu(contextMenu)
 
   //win.webContents.openDevTools();
 
