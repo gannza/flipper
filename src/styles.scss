@@ -73,17 +73,13 @@ span {
 }
 
 .desktop_body {
-  background: #f7f7f7;
+  background: #fff;
 }
 .web_body{
   // background: url("assets/img/bg1.png") no-repeat fixed center;
   // background-size: cover; 
+  overflow: auto;
 
-  background: url('assets/img/bg.png') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-   background-size: cover;
 }
 
 
